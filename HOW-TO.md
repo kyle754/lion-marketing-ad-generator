@@ -1,57 +1,63 @@
-# How to make Lion Marketing ads on a Mac
+# How to use Lion Marketing Ad Studio
 
-This tool takes campaign copy from a spreadsheet and puts it into every selected design and size.
-The finished PNGs are ready for paid social, display campaigns, review, or Canva handoff.
+## Start the app
 
-## The normal workflow
+On a Mac, double-click **Lion Ad Generator.command**. The app opens in your browser and a small
+Terminal window stays open in the background. That window is the local app—not an upload or cloud
+connection. Close it when you are finished.
 
-1. Double-click **Lion Ad Generator.command**.
-2. Choose **Edit ad copy**.
-3. Add or update rows in `1-COPY/ads.csv`, then save it as a CSV.
-4. Return to the launcher and choose **Make a quick preview**.
-5. Open `3-OUTPUT` and check the first ad in all sizes.
-6. Choose **Generate every ad**.
+The app is organized into five numbered steps. On a large window they appear in the left sidebar.
+On a narrow window they appear in the bottom navigation bar.
 
-The launcher finds Chrome automatically. Your source copy and ads stay on your Mac.
+## 1. Add the ad copy
 
-## Copy: `1-COPY/ads.csv`
+Open **Ad copy** and edit the variation cards.
 
-Each row is one campaign message. The starter columns are:
+- **Designs:** use `all`, or list selected designs such as `Bold,Report`.
+- **Internal name:** a short label used to identify the variation.
+- **Category / eyebrow:** the small text above the headline.
+- **Headline:** the primary campaign hook.
+- **Supporting copy:** the explanation beneath the headline.
+- **Call to action:** the button text.
+- **Proof point:** a short value such as `3×` or `+42%`.
+- **Proof point label:** what the value means.
 
-| Column | What it controls |
-|---|---|
-| `designs` | `all`, or selected designs such as `Bold,Report` |
-| `name` | Short internal name used in output filenames |
-| `eyebrow` | Small category line above the headline |
-| `hook` | Main headline |
-| `body` | Supporting copy |
-| `cta` | Button text |
-| `stat` | Short proof point, such as `3×` |
-| `stat_label` | Explanation of the proof point |
+Use **Duplicate** to create a closely related test. Use **+ Add variation** for a blank card.
+Character notes update while you type, and changes save automatically.
 
-You can add columns. A column called `offer` becomes `{{OFFER}}` inside a template. Keep the
-`designs` column so each row can choose its layouts.
+For a large spreadsheet, choose **Import CSV**. The first CSV row must contain column names.
+Choose **Export CSV** to move the current set back into Excel or Numbers.
 
-When saving from Excel or Numbers, keep the file in CSV format. If asked about character encoding,
-choose UTF-8.
+## 2. Set the brand
 
-## Brand: `1-COPY/brand.csv`
+Open **Brand**.
 
-This file controls reusable values such as `{{PRIMARY}}`, `{{ACCENT}}`, and `{{LOGO}}`.
+1. Upload the approved logo.
+2. Set the primary, dark, accent, ink, and muted colors.
+3. Check the visual brand preview.
+4. Choose **Save brand**.
 
-- Put the approved Lion Marketing colors in the color rows.
-- Copy the official logo into `assets/`.
-- Change `LOGO_FILE` to its relative path, for example `assets/lion-logo.png`.
-- PNG, JPG, and SVG logo files work.
+The **Advanced brand tokens** section exposes every reusable value from `brand.csv`. Use it when a
+template needs another shared value.
 
-## Copy guardrails: `1-COPY/limits.csv`
+The copy-length guidance below the brand settings does not block generation. It only creates
+helpful writing notes and, when needed, `3-OUTPUT/copy-check.csv`.
 
-Guardrails flag copy that may be too short or too long for a design. Ads still render. Review
-`3-OUTPUT/copy-check.csv` when it appears.
+## 3. Manage templates
 
-## Designs: `2-TEMPLATES/`
+Open **Templates** to see each design and its sizes.
 
-Templates are normal HTML files with placeholders such as:
+- Choose **Preview design** to jump to that design in the preview tool.
+- Choose **+ Add template** to upload an HTML template.
+- Choose **Remove** beside a source file to delete it after confirmation.
+- Choose **Open folder** when you want to edit HTML directly.
+
+Template filenames control design names and sizes:
+
+- `Bold 1200x628.html`
+- `Bold 1080x1080 1080x1350.html`
+
+Template copy fields use double braces:
 
 ```html
 <div class="hook">{{HOOK}}</div>
@@ -59,19 +65,36 @@ Templates are normal HTML files with placeholders such as:
 <div class="cta">{{CTA}}</div>
 ```
 
-The filename sets the design and output sizes:
+## 4. Preview and generate
 
-- `Bold 1200x628.html` means design `Bold`, size 1200×628.
-- `Bold 1080x1080 1080x1350.html` renders one template at both sizes.
+Open **Preview & generate**.
 
-Keep important portrait content inside the centered 1080×1080 safe area so Meta placements have
-room to crop.
+1. Choose a copy variation.
+2. Choose a design.
+3. Select **Refresh preview**.
+4. Review the rendered image.
+
+Choose **Quick proof** to render the first copy row in every design and size. Choose **Generate
+all** to render the full campaign. Progress advances after every image, and the app moves to the
+finished library when the job is complete.
+
+## 5. Review finished ads
+
+Open **Finished ads**.
+
+- Use the first filter row for dimensions.
+- Use the second filter row for designs.
+- Click an image for a larger quick view.
+- Use the arrow button to download one PNG.
+- Choose **Download all** for a ZIP of the full output folder.
+- Choose **Open folder** to work with the files in Finder.
 
 ## Troubleshooting
 
-- **Launcher will not open:** Control-click the `.command` file, choose **Open**, and confirm.
-- **“Python not found”:** Install Python 3 from python.org, then reopen the launcher.
-- **“Browser not found”:** Install Chrome, Edge, or Chromium in the Applications folder.
-- **Spreadsheet opens strangely:** Import the CSV as UTF-8 with commas as separators.
-- **Wrong logo or color:** Update `1-COPY/brand.csv`, then generate again.
-- **Text overflows:** Shorten the flagged copy or adjust that design’s font size.
+- **The launcher is blocked:** Control-click it, choose **Open**, and confirm.
+- **The app does not open:** Confirm `python3 --version` works in Terminal.
+- **Preview says renderer unavailable:** Install Chrome, Edge, or Chromium.
+- **A template upload is rejected:** Use an `.html` file containing at least one `{{PLACEHOLDER}}`.
+- **Text overflows:** Shorten the flagged copy or adjust that template’s typography.
+- **The app is already running:** Opening the launcher again returns to the same local app.
+- **You closed the browser tab:** Run the launcher again; the project data is still saved.

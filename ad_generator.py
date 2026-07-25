@@ -65,8 +65,14 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fields,
+            extrasaction="ignore",
+            lineterminator="\n",
+            quoting=csv.QUOTE_ALL,
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -287,10 +293,10 @@ def generate(args: argparse.Namespace) -> int:
     brand_tokens = load_brand_tokens()
     limits = load_limits()
 
-    print(f"Browser  : {browser.name}")
-    print(f"Brand    : {brand_tokens.get('BRAND_NAME', 'Lion Marketing')}")
-    print(f"Designs  : {', '.join(all_designs)}")
-    print(f"Variables: {', '.join(variable_columns)}\n")
+    print(f"Browser  : {browser.name}", flush=True)
+    print(f"Brand    : {brand_tokens.get('BRAND_NAME', 'Lion Marketing')}", flush=True)
+    print(f"Designs  : {', '.join(all_designs)}", flush=True)
+    print(f"Variables: {', '.join(variable_columns)}\n", flush=True)
 
     if args.preview_row:
         index = max(0, min(args.preview_row - 1, len(ads) - 1))
@@ -307,8 +313,8 @@ def generate(args: argparse.Namespace) -> int:
             encoding="utf-8",
         )
         capture(browser, preview_html, preview_png, size)
-        print(f"PREVIEW {template.design} [{size.name}] row {index + 1}")
-        print(f"Saved: {preview_png}")
+        print(f"PREVIEW {template.design} [{size.name}] row {index + 1}", flush=True)
+        print(f"Saved: {preview_png}", flush=True)
         return 0
 
     selected_ads = ads[:1] if args.proof else ads
@@ -363,6 +369,7 @@ def generate(args: argparse.Namespace) -> int:
                     html_path.write_text(rendered_source, encoding="utf-8")
                     capture(browser, html_path, png_path, size)
                     rendered += 1
+                    print(f"    image {rendered} done", flush=True)
                     manifest_row: dict[str, object] = {
                         "file": f"{size.name}/{base}.png",
                         "size": size.name,
@@ -371,7 +378,7 @@ def generate(args: argparse.Namespace) -> int:
                     }
                     manifest_row.update({column: ad.get(column, "") for column in variable_columns})
                     manifest.append(manifest_row)
-        print(f"  row {row_number}/{len(selected_ads)} done")
+        print(f"  row {row_number}/{len(selected_ads)} done", flush=True)
 
     manifest_fields = ["file", "size", "design", "row", *variable_columns]
     write_csv(OUTPUT_DIR / "manifest.csv", manifest, manifest_fields)
@@ -382,7 +389,7 @@ def generate(args: argparse.Namespace) -> int:
     else:
         copy_check.unlink(missing_ok=True)
 
-    print(f"\nDone. {rendered} images created in 3-OUTPUT.")
+    print(f"\nDone. {rendered} images created in 3-OUTPUT.", flush=True)
     if copy_issues:
         print(f"Heads up: {len(copy_issues)} copy field(s) are outside the length guardrails.")
         print("See 3-OUTPUT/copy-check.csv for the exact rows.")

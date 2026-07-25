@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#161b22">
+  <title>Lion Marketing Ad Studio</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand-lockup" href="#copy" aria-label="Lion Marketing Ad Studio">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Lion</strong><small>Ad Studio</small></span>
+      </a>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="copy">
+          <span class="nav-icon">01</span><span>Ad copy</span>
+        </button>
+        <button class="nav-item" data-view="brand">
+          <span class="nav-icon">02</span><span>Brand</span>
+        </button>
+        <button class="nav-item" data-view="templates">
+          <span class="nav-icon">03</span><span>Templates</span>
+        </button>
+        <button class="nav-item" data-view="preview">
+          <span class="nav-icon">04</span><span>Preview &amp; generate</span>
+        </button>
+        <button class="nav-item" data-view="outputs">
+          <span class="nav-icon">05</span><span>Finished ads</span>
+          <span class="nav-count" id="outputNavCount">0</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="privacy-dot"></span>
+        <div><strong>Private by design</strong><small>Everything stays on this Mac</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-brand" data-view="copy" aria-label="Go to ad copy">
+          <span class="brand-mark">L</span><strong>Lion Ad Studio</strong>
+        </button>
+        <div class="breadcrumb" id="breadcrumb">Ad copy</div>
+        <div class="topbar-actions">
+          <span class="save-state" id="saveState"><span></span>All changes saved</span>
+          <button class="button button-dark compact" data-view="preview">Preview ads</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="view active" id="view-copy" aria-labelledby="copyTitle">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Step 1 of 5</span>
+              <h1 id="copyTitle">Build your message set</h1>
+              <p>Add one variation for every idea you want to test. Each row can render in every design and size.</p>
+            </div>
+            <div class="heading-actions">
+              <label class="button button-secondary file-button">
+                Import CSV
+                <input type="file" id="adsImportInput" accept=".csv,text/csv">
+              </label>
+              <button class="button button-primary" id="addVariationButton">+ Add variation</button>
+            </div>
+          </div>
+
+          <div class="summary-strip" id="copySummary">
+            <div><strong id="variationCount">0</strong><span>Variations</span></div>
+            <div><strong id="copyIssueCount">0</strong><span>Copy notes</span></div>
+            <div><strong id="estimatedOutputCount">0</strong><span>Potential ads</span></div>
+            <a href="/download/ads.csv" download>Export CSV <span>↓</span></a>
+          </div>
+
+          <div class="variation-list" id="variationList"></div>
+          <button class="add-card" id="addVariationCard">
+            <span>+</span>
+            <strong>Add another copy variation</strong>
+            <small>Test a new hook, offer, audience, or call to action</small>
+          </button>
+        </section>
+
+        <section class="view" id="view-brand" aria-labelledby="brandTitle">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Step 2 of 5</span>
+              <h1 id="brandTitle">Make every ad feel like Lion</h1>
+              <p>Set the logo and colors once. Every template uses these brand settings automatically.</p>
+            </div>
+            <button class="button button-primary" id="saveBrandButton">Save brand</button>
+          </div>
+
+          <div class="brand-layout">
+            <div class="panel brand-preview-panel">
+              <div class="panel-label">Brand preview</div>
+              <div class="brand-preview" id="brandPreview">
+                <div class="brand-preview-glow"></div>
+                <div class="preview-logo-wrap">
+                  <img id="brandLogoPreview" alt="Current brand logo">
+                  <span id="brandLogoFallback">LION MARKETING</span>
+                </div>
+                <p class="preview-eyebrow">Performance marketing</p>
+                <h2>Ideas that move<br>people forward.</h2>
+                <span class="preview-button">Start a conversation</span>
+              </div>
+            </div>
+
+            <div class="panel brand-settings-panel">
+              <div class="setting-section">
+                <div class="setting-heading">
+                  <div><h3>Logo</h3><p>PNG, JPG, SVG, or WebP. Use a transparent background when possible.</p></div>
+                </div>
+                <label class="logo-dropzone" id="logoDropzone">
+                  <input type="file" id="logoInput" accept=".png,.jpg,.jpeg,.svg,.webp,image/*">
+                  <span class="upload-icon">↑</span>
+                  <span><strong>Choose a logo</strong><small>or drag and drop it here</small></span>
+                </label>
+              </div>
+              <div class="setting-section">
+                <div class="setting-heading"><div><h3>Brand colors</h3><p>Click a swatch or type an approved hex value.</p></div></div>
+                <div class="color-grid" id="colorGrid"></div>
+              </div>
+              <details class="advanced-settings">
+                <summary>Advanced brand tokens <span>⌄</span></summary>
+                <div class="token-list" id="brandTokenList"></div>
+                <button class="text-button" id="addBrandTokenButton">+ Add brand token</button>
+              </details>
+            </div>
+          </div>
+
+          <div class="panel limits-panel">
+            <div class="panel-header">
+              <div><h3>Copy length guidance</h3><p>These ranges help writers avoid overflow without blocking generation.</p></div>
+              <button class="button button-secondary compact" id="saveLimitsButton">Save guidance</button>
+            </div>
+            <div class="limits-grid" id="limitsGrid"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-templates" aria-labelledby="templatesTitle">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Step 3 of 5</span>
+              <h1 id="templatesTitle">Choose how the work looks</h1>
+              <p>Templates control layout and sizing. Upload HTML files with placeholders like <code>{{HOOK}}</code>.</p>
+            </div>
+            <div class="heading-actions">
+              <button class="button button-secondary" id="openTemplatesButton">Open folder</button>
+              <label class="button button-primary file-button">
+                + Add template
+                <input type="file" id="templateInput" accept=".html,.htm,text/html">
+              </label>
+            </div>
+          </div>
+          <div class="template-guide">
+            <span class="guide-icon">i</span>
+            <div><strong>Name controls output size</strong><p>For example: <code>Bold 1200x628.html</code> or <code>Bold 1080x1080 1080x1350.html</code>.</p></div>
+          </div>
+          <div class="template-grid" id="templateGrid"></div>
+        </section>
+
+        <section class="view" id="view-preview" aria-labelledby="previewTitle">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Step 4 of 5</span>
+              <h1 id="previewTitle">Review before you render</h1>
+              <p>Check one copy and design combination, then generate a quick proof or the full campaign.</p>
+            </div>
+          </div>
+
+          <div class="preview-layout">
+            <div class="panel preview-controls">
+              <div class="field">
+                <label for="previewRowSelect">Copy variation</label>
+                <select id="previewRowSelect"></select>
+              </div>
+              <div class="field">
+                <label for="previewDesignSelect">Design</label>
+                <select id="previewDesignSelect"></select>
+              </div>
+              <button class="button button-primary full-width" id="refreshPreviewButton">Refresh preview</button>
+              <div class="browser-status" id="browserStatus">
+                <span></span><div><strong>Renderer ready</strong><small>Chrome found on this Mac</small></div>
+              </div>
+              <div class="generation-card">
+                <span class="panel-label">Generate</span>
+                <h3>Ready to make your ads?</h3>
+                <p>Start with a 1-row proof or render every variation, design, and size.</p>
+                <div class="generation-actions">
+                  <button class="button button-secondary" id="proofButton">Quick proof</button>
+                  <button class="button button-dark" id="generateButton">Generate all</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel preview-stage-panel">
+              <div class="preview-stage-toolbar">
+                <span>Live preview</span><span id="previewMeta">Select an ad and design</span>
+              </div>
+              <div class="preview-stage" id="previewStage">
+                <div class="preview-empty" id="previewEmpty">
+                  <span>◎</span><strong>Your preview will appear here</strong><small>Choose a variation and design, then refresh.</small>
+                </div>
+                <img id="previewImage" alt="Rendered ad preview">
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-panel" id="progressPanel" hidden>
+            <div class="progress-top">
+              <div><span class="status-pulse"></span><strong id="jobTitle">Generating ads</strong></div>
+              <span id="jobPercent">0%</span>
+            </div>
+            <div class="progress-track"><span id="progressBar"></span></div>
+            <p id="jobMessage">Preparing the renderer…</p>
+          </div>
+        </section>
+
+        <section class="view" id="view-outputs" aria-labelledby="outputsTitle">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Step 5 of 5</span>
+              <h1 id="outputsTitle">Your finished ad library</h1>
+              <p>Filter, inspect, download, or hand off the finished campaign files.</p>
+            </div>
+            <div class="heading-actions">
+              <button class="button button-secondary" id="openOutputsButton">Open folder</button>
+              <a class="button button-dark" href="/api/outputs.zip" download>Download all ↓</a>
+            </div>
+          </div>
+          <div class="output-toolbar">
+            <div class="filter-group" id="sizeFilters"></div>
+            <div class="filter-group" id="designFilters"></div>
+            <span id="outputResultCount">0 files</span>
+          </div>
+          <div class="output-empty" id="outputEmpty">
+            <span>▧</span>
+            <h2>No finished ads yet</h2>
+            <p>Generate a quick proof or full campaign, and the images will appear here automatically.</p>
+            <button class="button button-primary" data-view="preview">Go to preview &amp; generate</button>
+          </div>
+          <div class="output-grid" id="outputGrid"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="active" data-view="copy"><span>01</span>Copy</button>
+    <button data-view="brand"><span>02</span>Brand</button>
+    <button data-view="templates"><span>03</span>Designs</button>
+    <button data-view="preview"><span>04</span>Preview</button>
+    <button data-view="outputs"><span>05</span>Ads</button>
+  </nav>
+
+  <div class="modal" id="imageModal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="Close preview"></button>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div><span class="panel-label">Finished ad</span><h2 id="modalTitle">Ad preview</h2></div>
+        <button class="icon-button" data-close-modal aria-label="Close">×</button>
+      </div>
+      <div class="modal-image-wrap"><img id="modalImage" alt="Full-size finished ad"></div>
+      <div class="modal-footer"><span id="modalMeta"></span><a class="button button-primary" id="modalDownload" download>Download PNG</a></div>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
