@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --primary:{{PRIMARY}};
+    --primary-dark:{{PRIMARY_DARK}};
+    --accent:{{ACCENT}};
+    --ink:{{INK}};
+    --muted:{{MUTED}};
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:628px;overflow:hidden}
+  body{font-family:'Helvetica Neue','Avenir Next',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .ad{position:relative;width:1200px;height:628px;background:#ffffff;display:flex}
+
+  .logo{position:absolute;top:34px;left:56px;z-index:5}
+  .logo .brand-logo{height:40px;display:block}
+
+  .left{position:relative;width:648px;padding:64px 56px;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:22px}
+  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .hook{font-size:52px;line-height:1.04;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+  .body{margin-top:22px;font-size:23px;line-height:1.42;color:var(--muted);max-width:520px}
+  .cta{margin-top:36px;align-self:flex-start;background:var(--accent);color:var(--primary-dark);font-size:20px;
+    font-weight:800;padding:17px 32px;border-radius:11px;box-shadow:0 10px 24px rgba(0,39,22,.22)}
+
+  .right{position:relative;width:552px;background:linear-gradient(158deg,var(--primary-dark),var(--primary));overflow:hidden}
+  .right::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 400px at 80% 15%,rgba(255,255,255,.14),transparent 60%)}
+  .art{position:absolute;inset:0;z-index:3}
+  .badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.34);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#fff}
+  .badge .pct{font-size:82px;font-weight:800;line-height:1;letter-spacing:-.03em}
+  .badge .lbl{margin-top:8px;max-width:190px;text-align:center;font-size:15px;line-height:1.25;
+    font-weight:600;letter-spacing:.10em;text-transform:uppercase;opacity:.92}
+</style>
+</head>
+<body>
+  <div class="ad">
+    <div class="logo">{{LOGO}}</div>
+    <div class="left">
+      <span class="eyebrow"><span class="dot"></span>{{EYEBROW}}</span>
+      <div class="hook">{{HOOK}}</div>
+      <div class="body">{{BODY}}</div>
+      <div class="cta">{{CTA}}</div>
+    </div>
+    <div class="right">
+      <svg class="art" viewBox="0 0 552 628" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2">
+          <path d="M60 470 L160 410 L260 430 L360 330 L470 250"/>
+        </g>
+        <g fill="rgba(255,255,255,.22)">
+          <rect x="70" y="470" width="26" height="90" rx="4"/>
+          <rect x="150" y="430" width="26" height="130" rx="4"/>
+          <rect x="230" y="450" width="26" height="110" rx="4"/>
+          <rect x="330" y="360" width="26" height="200" rx="4"/>
+          <rect x="440" y="280" width="26" height="280" rx="4"/>
+        </g>
+      </svg>
+      <div class="badge">
+        <div class="pct">{{STAT}}</div>
+        <div class="lbl">{{STAT_LABEL}}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

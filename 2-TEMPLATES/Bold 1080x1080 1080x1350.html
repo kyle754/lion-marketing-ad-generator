@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --primary:{{PRIMARY}};
+    --primary-dark:{{PRIMARY_DARK}};
+    --accent:{{ACCENT}};
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden}
+  body{font-family:'Helvetica Neue','Avenir Next',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .ad{position:relative;width:100vw;height:100vh;overflow:hidden;
+    background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%);
+    display:flex;align-items:center;justify-content:center}
+  .grid{position:absolute;inset:0;opacity:.13}
+  .glow{position:absolute;width:820px;height:820px;border-radius:50%;
+    background:radial-gradient(circle,rgba(51,235,151,.26),transparent 62%);top:-280px;right:-200px}
+  .safe{position:relative;z-index:4;width:1080px;height:1080px;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;padding:0 110px}
+  .logo{position:absolute;top:74px;left:50%;transform:translateX(-50%);
+    background:#fff;padding:11px 18px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+  .logo .brand-logo{height:40px;display:block}
+  .eyebrow{font-size:17px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:24px}
+  .hook{font-size:70px;line-height:1.02;font-weight:800;color:#fff;letter-spacing:-.02em;max-width:920px}
+  .body{margin-top:26px;font-size:27px;line-height:1.4;color:rgba(255,255,255,.87);max-width:780px}
+  .cta{margin-top:40px;background:var(--accent);color:var(--primary-dark);font-size:24px;font-weight:800;
+    padding:20px 44px;border-radius:13px;box-shadow:0 14px 34px rgba(0,0,0,.26)}
+</style>
+</head>
+<body>
+  <div class="ad">
+    <svg class="grid" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <defs>
+        <pattern id="p" width="54" height="54" patternUnits="userSpaceOnUse">
+          <path d="M54 0 L0 0 0 54" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#p)"/>
+    </svg>
+    <div class="glow"></div>
+    <div class="safe">
+      <div class="logo">{{LOGO}}</div>
+      <div class="eyebrow">{{EYEBROW}}</div>
+      <div class="hook">{{HOOK}}</div>
+      <div class="body">{{BODY}}</div>
+      <div class="cta">{{CTA}}</div>
+    </div>
+  </div>
+</body>
+</html>

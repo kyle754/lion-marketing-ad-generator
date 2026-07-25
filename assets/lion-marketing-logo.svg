@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="92" viewBox="0 0 460 92" role="img" aria-labelledby="title">
+  <title id="title">Lion Marketing</title>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#FFB703" d="M46 4 60 20l22-3-8 21 13 18-22 5-10 21-16-16-22 7 1-23L4 33l22-8L32 5l14 13z"/>
+    <path fill="#4A1D09" d="M28 34c7-11 29-11 36 0 5 8 1 25-7 32l-11 10-11-10c-8-7-12-24-7-32zm11 2 7 9 7-9-2 13h-10l-2-13zm3 18h8l-4 8-4-8z"/>
+    <text x="106" y="43" fill="#1F2937" font-family="Helvetica Neue, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="1">LION</text>
+    <text x="106" y="72" fill="#E85D04" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="5">MARKETING</text>
+  </g>
+</svg>

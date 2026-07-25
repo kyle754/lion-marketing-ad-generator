@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --primary:{{PRIMARY}};
+    --primary-dark:{{PRIMARY_DARK}};
+    --accent:{{ACCENT}};
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:628px;overflow:hidden}
+  body{font-family:'Helvetica Neue','Avenir Next',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .ad{position:relative;width:1200px;height:628px;background:#002716;display:flex;align-items:center;overflow:hidden}
+  .ad::before{content:"";position:absolute;width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(51,235,151,.20),transparent 60%);top:-220px;left:-200px}
+  .logo{position:absolute;top:28px;left:52px;z-index:6;
+    background:#fff;padding:8px 13px;border-radius:9px;box-shadow:0 6px 16px rgba(0,0,0,.30)}
+  .logo .brand-logo{height:34px;display:block}
+
+  .left{position:relative;z-index:4;width:600px;padding:60px 40px 0 56px}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .hook{font-size:46px;line-height:1.06;font-weight:800;color:#fff;letter-spacing:-.015em}
+  .body{margin-top:18px;font-size:19px;line-height:1.45;color:#a9c3b6;max-width:470px}
+  .cta{margin-top:30px;display:inline-block;background:var(--accent);color:var(--primary-dark);font-size:18px;
+    font-weight:800;padding:15px 28px;border-radius:10px}
+
+  .right{position:relative;z-index:4;flex:1;display:flex;align-items:center;justify-content:center}
+  .card{width:430px;background:#fff;border-radius:16px;padding:26px 26px 22px;
+    box-shadow:0 30px 70px rgba(0,0,0,.45);transform:rotate(-1.5deg)}
+  .card h3{font-size:15px;color:#002716;font-weight:800;letter-spacing:.02em}
+  .card .sub{font-size:12px;color:#94a3b8;margin-top:2px;margin-bottom:16px}
+  .row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-top:1px solid #eef2f7}
+  .row .n{font-size:14px;color:#334155}
+  .row .v{font-size:14px;font-weight:700;color:#002716}
+  .row .v.cut{color:#dc2626}
+  .total{margin-top:14px;background:#effef8;border:1px solid #c8f0dd;border-radius:11px;
+    padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+  .total .t{font-size:13px;font-weight:700;color:var(--primary)}
+  .total .amt{font-size:26px;font-weight:800;color:var(--primary)}
+  .bars{display:flex;gap:6px;align-items:flex-end;height:44px;margin-top:16px}
+  .bars span{flex:1;background:var(--primary);border-radius:3px 3px 0 0;opacity:.88}
+</style>
+</head>
+<body>
+  <div class="ad">
+    <div class="logo">{{LOGO}}</div>
+    <div class="left">
+      <div class="eyebrow">{{EYEBROW}}</div>
+      <div class="hook">{{HOOK}}</div>
+      <div class="body">{{BODY}}</div>
+      <span class="cta">{{CTA}}</span>
+    </div>
+    <div class="right">
+      <div class="card">
+        <h3>Campaign Performance Snapshot</h3>
+        <div class="sub">Strategy + creative + media by {{BRAND_NAME}}</div>
+        <div class="row"><span class="n">Campaign reach</span><span class="v">284K</span></div>
+        <div class="row"><span class="n">Qualified leads</span><span class="v">+42%</span></div>
+        <div class="row"><span class="n">Cost per lead</span><span class="v cut">-31%</span></div>
+        <div class="row"><span class="n">Conversion rate</span><span class="v">6.8%</span></div>
+        <div class="total"><span class="t">{{STAT_LABEL}}</span><span class="amt">{{STAT}}</span></div>
+        <div class="bars">
+          <span style="height:60%"></span><span style="height:80%"></span><span style="height:45%"></span>
+          <span style="height:95%"></span><span style="height:70%"></span><span style="height:55%"></span>
+          <span style="height:85%"></span><span style="height:40%"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

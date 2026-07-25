@@ -1,0 +1,11 @@
+# Generated ad images (regenerate with the launcher)
+3-OUTPUT/
+
+# Temp working files (chrome profile, preview scratch, render logs)
+.tmp/
+
+# OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+__pycache__/
